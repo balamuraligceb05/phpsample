@@ -1,0 +1,45 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main23
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'MyDocker Hub'
+        repository: 'arunavarni/az104'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+- stage: Deploy
+  jobs:
+    - deployment: Dev
+      environment: Dev
+      strategy: 
+       runOnce:
+         deploy:
+           steps:
+            - task: AzureContainerApps@1
+              inputs:
+                azureSubscription: 'MyAzureDemo'
+                containerAppName: 'demo-app'
+                containerAppEnvironment: 'demo-Environment'
+                targetPort: '80'
+             
