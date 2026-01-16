@@ -27,6 +27,7 @@ stages:
               echo $(Build.SourceBranchName)
               echo $(System.DefaultWorkingDirectory)
               echo $(Build.ArtifactStagingDirectory)
+              echo "Test"
               echo java -version
               echo node --version
               echo python --version
