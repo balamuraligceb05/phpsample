@@ -4,12 +4,6 @@ $host = getenv('DB_HOST') ?: '10.0.0.4';
 $db   = getenv('DB_NAME') ?: 'coursesdb';
 $user = getenv('DB_USER') ?: 'dbadmin';
 $pass = getenv('DB_PASS') ?: 'Microsoft2025';
-
-$dsn  = "mysql:host=$host;dbname=$db;charset=utf8mb4";
-
-$pdo = new PDO($dsn, $user, $pass);                 
-$stmt = $pdo->query("SELECT id, name, rating FROM courses ORDER BY id");
-$courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!doctype html>
 <html lang="en">
@@ -43,13 +37,13 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($courses as $row): ?>
+   
         <tr>
-          <th scope="row"><?php echo htmlspecialchars($row['id']); ?></th>
-          <td><?php echo htmlspecialchars($row['name']); ?></td>
-          <td><?php echo htmlspecialchars($row['rating']); ?></td>
+          <th scope="col">Course ID</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Rating</th>
         </tr>
-        <?php endforeach; ?>
+
       </tbody>
     </table>
   </div>
