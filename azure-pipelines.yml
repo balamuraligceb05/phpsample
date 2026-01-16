@@ -34,7 +34,7 @@ stages:
           #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: '$(System.DefaultWorkingDirectory)/*.php'
+              rootFolderOrFile: '$(System.DefaultWorkingDirectory)/*php'
               includeRootFolder: false
               archiveType: 'zip'
               archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
