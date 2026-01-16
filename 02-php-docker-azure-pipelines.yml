@@ -23,6 +23,6 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'MyDocker Hub'
-        repository: 'az104'
+        repository: 'arunavarni/az104'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
