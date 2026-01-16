@@ -9,11 +9,25 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: Checkout
+    jobs:
+      - job:
+        steps:
+          - bash: echo "Checkout is done"
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - stage: Build
+    jobs:
+      - job: 
+        steps:
+          - checkout: none
+          - bash: | 
+              echo $(Build.BuildId)
+              echo $(Build.BuildNumber)
+              echo $(Build.SourceBranchName)
+              echo $(System.DefaultWorkingDirectory)
+              echo $(Build.ArtifactStagingDirectory)
+              echo java -version
+              echo node --version
+              echo python --version
+              echo mvn -version
