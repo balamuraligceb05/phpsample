@@ -57,6 +57,6 @@ stages:
                     azureSubscription: 'Azure subscription 1 (1cd44045-c104-4c60-9365-ebbb2050b7b7)'
                     appType: 'webAppLinux'
                     appName: 'varuwebapp-demo'
-                    package: '$(System.ArtifactsDirectory)/index.php'
+                    package: '$(System.ArtifactsDirectory)/drop/index.php'
                     runtimeStack: 'PHP|8.3'
             
