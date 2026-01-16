@@ -39,7 +39,10 @@ stages:
             - task: AzureContainerApps@1
               inputs:
                 azureSubscription: 'MyAzureDemo'
+                acrName: 'MyDocker Hub'
+                imageToDeploy: 'arunavarni/az104:$(tag)'
                 containerAppName: 'demo-app'
+                resourceGroup: 'hm_demo_rg'
                 containerAppEnvironment: 'demo-Environment'
                 targetPort: '80'
              
