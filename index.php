@@ -25,7 +25,7 @@ $pass = getenv('DB_PASS') ?: 'Microsoft2025';
 </head>
 <body>
   <div>
-    <h1><?php echo "List of Courses" ?></h1>
+    <h1><?php echo "List of Courses Available in the Library" ?></h1>
     <p>This is a list of Courses</p>
 
     <table>
