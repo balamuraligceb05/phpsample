@@ -38,3 +38,13 @@ stages:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'drop'
               publishLocation: 'Container'
+  - stage: DevDeploy
+    jobs:
+      - deployment: DevDeployJob
+        environment: Dev
+        strategy:
+          runOnce: 
+            deploy:
+              steps:
+                - bash: echo "Deployment started"
+            
