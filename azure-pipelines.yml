@@ -32,11 +32,11 @@ stages:
               echo node --version
               echo python --version
               echo mvn -version
+          - bash: ls -R $(System.DefaultWorkingDirectory)
           - bash: ls -R $(Build.ArtifactStagingDirectory)
           - task: CopyFiles@2
             inputs:
               SourceFolder: '$(System.DefaultWorkingDirectory)'
-              Contents: |
-                *.php
+              Contents: index.php              
               TargetFolder: '$(Build.ArtifactStagingDirectory)'
           - bash: ls -R $(Build.ArtifactStagingDirectory)
