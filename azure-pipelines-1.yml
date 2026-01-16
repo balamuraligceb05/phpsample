@@ -27,7 +27,24 @@ stages:
         repository: 'arunavarni/az104'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-        tags: '$(tag)'
-
+        tags: ''
+- stage: Deploy
+  jobs:
+    - deployment: Dev
+      environment: Dev
+      strategy:
+       runOnce:
+         deploy:
+           steps:
+            - task: AzureRmWebAppDeployment@5
+              inputs:
+                ConnectionType: 'AzureRM'
+                azureSubscription: 'MyAzureDemo'
+                appType: 'webAppContainer'
+                WebAppName: 'varuwebapp-demo'
+                DockerNamespace: 'arunavarni'
+                DockerRepository: 'az104'
+                DockerImageTag: '$(tag)' 
+         
 
               
