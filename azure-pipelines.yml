@@ -27,14 +27,14 @@ stages:
               echo mvn -version
           - bash: ls -R $(System.DefaultWorkingDirectory)
           - bash: ls -R $(Build.ArtifactStagingDirectory)
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(System.DefaultWorkingDirectory)'
-              Contents: index.php              
-              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          # - task: CopyFiles@2
+          #   inputs:
+          #     SourceFolder: '$(System.DefaultWorkingDirectory)'
+          #     Contents: index.php              
+          #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
           - task: ArchiveFiles@2
             inputs:
-              rootFolderOrFile: '$(System.DefaultWorkingDirectory)/index.php'
+              rootFolderOrFile: '$(System.DefaultWorkingDirectory)/*.php'
               includeRootFolder: true
               archiveType: 'zip'
               archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
