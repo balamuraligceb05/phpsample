@@ -55,16 +55,11 @@ stages:
             deploy:
               steps:
                 - bash: echo "Deployment started"
-                - task: DownloadBuildArtifacts@1
-                  inputs:
-                    buildType: 'current'
-                    downloadType: 'specific'
-                    downloadPath: '$(System.ArtifactsDirectory)/$(Build.BuildId).zip'
                 - task: AzureWebApp@1
                   inputs:
                     azureSubscription: 'Azure subscription 1 (1cd44045-c104-4c60-9365-ebbb2050b7b7)'
                     appType: 'webAppLinux'
                     appName: 'varuwebapp-demo'
-                    package: '$(System.DefaultWorkingDirectory)/drop/$(Build.BuildId).zip'
+                    package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
                     runtimeStack: 'PHP|8.3'
             
