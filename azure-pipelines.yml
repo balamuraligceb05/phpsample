@@ -37,6 +37,6 @@ stages:
             inputs:
               SourceFolder: '$(System.DefaultWorkingDirectory)'
               Contents: |
-                **/*.php
+                *.php
               TargetFolder: '$(Build.ArtifactStagingDirectory)'
           - bash: ls -R $(Build.ArtifactStagingDirectory)
