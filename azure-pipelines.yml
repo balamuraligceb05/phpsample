@@ -32,10 +32,18 @@ stages:
               SourceFolder: '$(System.DefaultWorkingDirectory)'
               Contents: index.php              
               TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: '$(System.DefaultWorkingDirectory)/index.php'
+              includeRootFolder: true
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              replaceExistingArchive: true
+
           - bash: ls -R $(Build.ArtifactStagingDirectory)
           - task: PublishBuildArtifacts@1
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
               ArtifactName: 'drop'
               publishLocation: 'Container'
   - stage: DevDeploy
@@ -51,12 +59,12 @@ stages:
                   inputs:
                     buildType: 'current'
                     downloadType: 'specific'
-                    downloadPath: '$(System.ArtifactsDirectory)'
+                    downloadPath: '$(System.ArtifactsDirectory)/$(Build.BuildId).zip'
                 - task: AzureWebApp@1
                   inputs:
                     azureSubscription: 'Azure subscription 1 (1cd44045-c104-4c60-9365-ebbb2050b7b7)'
                     appType: 'webAppLinux'
                     appName: 'varuwebapp-demo'
-                    package: '$(System.ArtifactsDirectory)/drop/index.php'
+                    package: '$(System.ArtifactsDirectory)/drop/$(Build.BuildId).zip'
                     runtimeStack: 'PHP|8.3'
             
